@@ -1,0 +1,74 @@
+<svg width="1200" height="300" viewBox="0 0 1200 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1128"/>
+      <stop offset="55%" stop-color="#0f2557"/>
+      <stop offset="100%" stop-color="#0a3d62"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00b4d8"/>
+      <stop offset="100%" stop-color="#48cae4"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00b4d8" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#00b4d8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="300" fill="url(#bg)"/>
+
+  <circle cx="150" cy="150" r="140" fill="url(#glow)"/>
+
+  <g stroke="#48cae4" stroke-width="0.6" opacity="0.25">
+    <line x1="700" y1="40" x2="820" y2="40"/>
+    <line x1="820" y1="40" x2="880" y2="90"/>
+    <line x1="880" y1="90" x2="980" y2="90"/>
+    <line x1="820" y1="40" x2="820" y2="130"/>
+    <line x1="980" y1="90" x2="1040" y2="150"/>
+    <line x1="980" y1="90" x2="980" y2="180"/>
+    <line x1="1040" y1="150" x2="1140" y2="150"/>
+    <line x1="820" y1="130" x2="900" y2="190"/>
+    <line x1="900" y1="190" x2="980" y2="180"/>
+    <line x1="900" y1="190" x2="900" y2="260"/>
+    <line x1="700" y1="40" x2="700" y2="120"/>
+    <line x1="700" y1="120" x2="780" y2="180"/>
+    <line x1="780" y1="180" x2="900" y2="190"/>
+    <line x1="780" y1="180" x2="760" y2="250"/>
+  </g>
+  <g fill="#48cae4" opacity="0.6">
+    <circle cx="700" cy="40" r="4"/>
+    <circle cx="820" cy="40" r="4"/>
+    <circle cx="880" cy="90" r="4"/>
+    <circle cx="980" cy="90" r="4"/>
+    <circle cx="820" cy="130" r="4"/>
+    <circle cx="1040" cy="150" r="4"/>
+    <circle cx="980" cy="180" r="4"/>
+    <circle cx="1140" cy="150" r="4"/>
+    <circle cx="900" cy="190" r="4"/>
+    <circle cx="700" cy="120" r="4"/>
+    <circle cx="780" cy="180" r="4"/>
+    <circle cx="900" cy="260" r="4"/>
+    <circle cx="760" cy="250" r="4"/>
+  </g>
+
+  <g transform="translate(150,150)">
+    <path d="M0,-70 L55,-50 L55,10 C55,50 25,75 0,88 C-25,75 -55,50 -55,10 L-55,-50 Z"
+          fill="#0f2557" stroke="url(#accent)" stroke-width="3"/>
+    <path d="M0,-70 L55,-50 L55,10 C55,50 25,75 0,88 C-25,75 -55,50 -55,10 L-55,-50 Z"
+          fill="none" stroke="#00b4d8" stroke-width="1" opacity="0.5"/>
+    <path d="M-28,0 L-8,22 L32,-24" fill="none" stroke="#48cae4" stroke-width="7"
+          stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <text x="330" y="130" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700" fill="#ffffff">
+    Azure Sentinel
+  </text>
+  <text x="330" y="180" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="700" fill="url(#accent)">
+    Homelab Guide
+  </text>
+  <text x="332" y="215" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#9fb8d9">
+    SIEM setup · Azure Arc onboarding · detections · triage
+  </text>
+
+  <rect x="0" y="296" width="1200" height="4" fill="url(#accent)"/>
+</svg>
