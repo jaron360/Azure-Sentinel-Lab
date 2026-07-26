@@ -36,6 +36,8 @@ Sentinel needs a Log Analytics Workspace (LAW) to store and query data.
    - **Region**: pick one close to you (keep it consistent for all resources)
 4. Click **Review + create**, then **Create**.
 5. Wait for deployment to finish, then click **Go to resource**.
+
+![Create log workspace](images/Log%20workspace.png)
 ---
  
 ## 3. Add Microsoft Sentinel to the Workspace
@@ -68,7 +70,19 @@ sudo azcmagent show
 You should see output confirming:
 - **Agent Status**: Connected
 - **Resource Name / Resource Group** matching what you configured in Arc
+
+
+![Azure Arc onboarding](images/azure%20Arc%20onboard.png)
+
+![Azure Agent install](images/Azure%20Agent%20Install.png)
+
+![Agent status](images/Agent%20status.png)
+
+
 ---
+
+
+
  
 ## 5. Create a Data Collection Rule (DCR)
  
@@ -268,6 +282,8 @@ You can also browse Microsoft's **built-in rule templates** under the **Rule tem
 4. Click **Create rule** in the details pane.
 5. Walk through the same tabs as a custom rule (**General**, **Set rule logic**, **Incident settings**, **Automated response**) — the fields will be pre-populated from the template, but you can edit the KQL query and thresholds to fit your homelab.
 6. Click **Review + create**, then **Create** to add the rule to your active Analytics rules list.
+
+![Sentinel rules](images/Sentinel%20Rules.png)
 ---
  
 ## 9. Triage Incidents
