@@ -1,6 +1,5 @@
+![Azure Sentinel Homelab Guide](images/banner.svg)
 
-
-Azure sentinel homelab guide · MD
 # Setting Up Azure Sentinel in Your Cybersecurity Homelab
  
 A step-by-step guide to standing up Microsoft Sentinel as a SIEM for your homelab, connecting Linux endpoints via Azure Arc, and collecting logs for analysis.
