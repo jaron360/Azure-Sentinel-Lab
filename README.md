@@ -230,6 +230,68 @@ Syslog
  
 ---
  
+## 8. Create Detection Rules (Analytics Rules)
+ 
+Analytics Rules are what turn raw ingested logs into actionable **incidents** in Sentinel.
+ 
+1. Go to your **Microsoft Sentinel** resource in the Azure Portal.
+2. In the left-hand menu, under **Configuration**, click **Analytics**.
+3. Click **+ Create** → **Scheduled query rule** (most common rule type for homelab use).
+4. **General tab:**
+   - **Name**: e.g. `Detect Failed SSH Logins`
+   - **Description**: brief summary of what the rule detects
+   - **Tactics/Techniques**: optionally map to MITRE ATT&CK (e.g. `Credential Access`, `T1110`)
+   - **Severity**: Low / Medium / High / Informational
+5. **Set rule logic tab:**
+   - Write a KQL query that defines the detection. Example — repeated failed SSH logins:
+```kql
+     Syslog
+     | where Facility == "auth" and SyslogMessage has "Failed password"
+     | summarize FailedAttempts = count() by Computer, HostName, bin(TimeGenerated, 5m)
+     | where FailedAttempts > 5
+```
+   - Set **Query scheduling**: how often the rule runs (e.g. every 5 minutes) and the lookback period (e.g. last 5 minutes).
+   - Set **Alert threshold**: e.g. trigger when results are "greater than 0".
+6. **Incident settings tab:**
+   - Leave **Create incidents from alerts** enabled.
+   - Optionally enable **alert grouping** to combine related alerts into a single incident.
+7. **Automated response tab (optional):**
+   - Attach a **Playbook** (Logic App) here if you want automated actions (e.g. notify via email/Teams, disable an account).
+8. Click **Review + create**, then **Create**.
+> **Tip:** Start with a few high-signal rules (failed logins, sudo usage, new user creation) rather than importing every built-in template — homelab log volume is low, so overly broad rules will just create noise.
+ 
+You can also browse Microsoft's **built-in rule templates** under the **Rule templates** tab in Analytics — many can be cloned and adapted to your Syslog schema instead of writing detections from scratch. To add one:
+ 
+1. In **Microsoft Sentinel** → **Analytics**, click the **Rule templates** tab.
+2. Use the search bar or **Data source** filter to find a template relevant to your data (e.g. filter by **Syslog** or search "SSH").
+3. Click a template to preview its description, logic, and required data sources.
+4. Click **Create rule** in the details pane.
+5. Walk through the same tabs as a custom rule (**General**, **Set rule logic**, **Incident settings**, **Automated response**) — the fields will be pre-populated from the template, but you can edit the KQL query and thresholds to fit your homelab.
+6. Click **Review + create**, then **Create** to add the rule to your active Analytics rules list.
+---
+ 
+## 9. Triage Incidents
+ 
+Once an analytics rule fires, it produces an **incident** for you to investigate.
+ 
+1. In Microsoft Sentinel, go to **Incidents** under **Threat management**.
+2. Click an incident to open its details pane. You'll see:
+   - **Severity** and **status** (New / Active / Closed)
+   - **Alerts** that triggered it, and the **entities** involved (host, account, IP)
+   - A timeline of related events
+3. Click **Investigate** to open the investigation graph, which visually maps related entities (accounts, hosts, IPs) so you can see how they connect.
+4. Work the incident:
+   - Click into the underlying **alerts** to review the raw log entries that triggered the detection.
+   - Use **Logs** (or the entity's **Related events** tab) to pivot and run follow-up KQL queries — e.g. checking what that account/IP did before and after the alert.
+5. Assign an **owner** (yourself, in a homelab) and set **status** to **Active** while investigating.
+6. Add **comments** to the incident documenting what you found — good practice for building an audit trail, even solo.
+7. Once resolved, set **status** to **Closed** and select a **classification reason**:
+   - `True Positive`, `Benign Positive`, or `False Positive`
+   - Add a short justification — this trains your judgment and gives you a record to tune future rules against.
+> **Homelab tip:** Deliberately trigger some of your own detections (e.g. SSH brute-force a test account from another VM) so you can practice the full triage workflow end-to-end before relying on it for real detections.
+ 
+---
+ 
 ## Troubleshooting Tips
  
 | Symptom | Likely Cause | Fix |
